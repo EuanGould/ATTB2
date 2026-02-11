@@ -3,23 +3,36 @@ using UnityEngine;
 
 public class CardBehaviour : MonoBehaviour
 {
+    // adjustable
+    [SerializeField] float enlarge_factor = 1.2f;
+    [SerializeField] float vertical_offset_on_selection = 200f;
+
+    // internal
     private bool selected = false;
     private Vector2 initialSize;
-    
+    private float y_offset = 0f;
+
     public void Select()
     {
         selected = true;
+        y_offset = vertical_offset_on_selection;
     }
 
     public void Deselect()
     {
         selected = false;
         transform.localScale = initialSize;
+        y_offset = 0f;
     }
 
     public bool GetSelected()
     {
         return selected;
+    }
+
+    public float GetYOffset()
+    {
+        return y_offset;
     }
 
     public virtual void Play()
@@ -43,7 +56,7 @@ public class CardBehaviour : MonoBehaviour
     {
         if (selected)
         {
-            transform.localScale = initialSize * 1.1f + Vector2.one * 0.5f * Mathf.Abs(Mathf.Sin(Time.time));
+            transform.localScale = initialSize * enlarge_factor + Vector2.one * Mathf.Abs(Mathf.Sin(Time.time * 2)) * 0.1f;
         }
     }
 }

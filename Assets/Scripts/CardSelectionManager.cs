@@ -24,10 +24,19 @@ public class CardSelectionManager : InputtableBehaviour
         ResetHandSelection();
     }
 
-    private void ResetHandSelection()
+    private void PositionCards()
     {
-        // call whenever the number of cards in hand changes
+        float screen_size = Screen.width;
+        float gap = screen_size * 0.7f / cards_in_hand.Count;
 
+        for (int i = 0; i < cards_in_hand.Count; i++)
+        {
+            cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition = new Vector2 (-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset());
+        }
+    }
+
+    private void SanitiseCurrentSelection()
+    {
         if (cards_in_hand.Count <= currentSelected)
         {
             currentSelected = cards_in_hand.Count - 1;
@@ -40,12 +49,22 @@ public class CardSelectionManager : InputtableBehaviour
         cards_in_hand[currentSelected].Select();
     }
 
+    private void ResetHandSelection()
+    {
+        // call whenever the number of cards in hand changes
+        cards_in_hand = GetHand();
+        
+        SanitiseCurrentSelection();
+        PositionCards();
+    }
+
     public override void OnSingleButtonHeld()
     {
         // called when inputManager detects a held input
         cards_in_hand[currentSelected].Play();
         cards_in_hand.RemoveAt(currentSelected);
-        ResetHandSelection();
+        SanitiseCurrentSelection();
+        PositionCards();
         cards_in_hand[currentSelected].Select();
     }
 
@@ -56,6 +75,8 @@ public class CardSelectionManager : InputtableBehaviour
         currentSelected += 1;
         currentSelected %= cards_in_hand.Count;
         cards_in_hand[currentSelected].Select();
+
+        ResetHandSelection();
     }
 
     private List<CardBehaviour> GetHand()
