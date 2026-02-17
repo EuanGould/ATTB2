@@ -37,6 +37,11 @@ public class CardSelectionManager : InputtableBehaviour
 
     private void SanitiseCurrentSelection()
     {
+        if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
+        {
+            GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+        }
+
         if (cards_in_hand.Count <= currentSelected)
         {
             currentSelected = cards_in_hand.Count - 1;
@@ -49,8 +54,13 @@ public class CardSelectionManager : InputtableBehaviour
         cards_in_hand[currentSelected].Select();
     }
 
-    private void ResetHandSelection()
+    public void ResetHandSelection()
     {
+        if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
+        {
+            GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+        }
+
         // call whenever the number of cards in hand changes
         cards_in_hand = GetHand();
         
@@ -81,6 +91,7 @@ public class CardSelectionManager : InputtableBehaviour
 
     private List<CardBehaviour> GetHand()
     {
+
         // gets all cards that are a child of this object
         return new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>());
     }

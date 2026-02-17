@@ -12,6 +12,11 @@ public class CardBehaviour : MonoBehaviour
     private Vector2 initialSize;
     private float y_offset = 0f;
 
+    public EnemyBehaviour[] GetEnemies()
+    {
+        return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
+    }
+
     public void Select()
     {
         selected = true;
@@ -41,10 +46,16 @@ public class CardBehaviour : MonoBehaviour
         Discard();
     }
 
+    public void DrawNewCard()
+    {
+        GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+    }
+
     public void Discard()
     {
         // called when the card needs to go to the discard pile
-        Destroy(gameObject);
+        transform.SetParent(GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<RectTransform>());
+        Deselect();
     }
 
     private void Awake()

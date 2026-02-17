@@ -7,6 +7,9 @@ TagManager:
   - PlayerHand
   - SelectionIndicator
   - InputManager
+  - DiscardPile
+  - DeckPile
+  - EnemiesLayer
   layers:
   - Default
   - TransparentFX
