@@ -18,6 +18,8 @@ public class CardSelectionManager : InputtableBehaviour
         Watching
     }
     
+    State state = State.Selecting;
+
     void Awake()
     {
         cards_in_hand = GetHand();
@@ -70,23 +72,29 @@ public class CardSelectionManager : InputtableBehaviour
 
     public override void OnSingleButtonHeld()
     {
-        // called when inputManager detects a held input
-        cards_in_hand[currentSelected].Play();
-        cards_in_hand.RemoveAt(currentSelected);
-        SanitiseCurrentSelection();
-        PositionCards();
-        cards_in_hand[currentSelected].Select();
+        if (state == State.Selecting)
+        {
+            // called when inputManager detects a held input
+            cards_in_hand[currentSelected].Play();
+            cards_in_hand.RemoveAt(currentSelected);
+            SanitiseCurrentSelection();
+            PositionCards();
+            cards_in_hand[currentSelected].Select();
+        }
     }
 
     public override void OnSingleButtonTapped()
     {
-        // called when inputManager detects a tap input
-        cards_in_hand[currentSelected].Deselect();
-        currentSelected += 1;
-        currentSelected %= cards_in_hand.Count;
-        cards_in_hand[currentSelected].Select();
+        if (state == State.Selecting)
+        {
+            // called when inputManager detects a tap input
+            cards_in_hand[currentSelected].Deselect();
+            currentSelected += 1;
+            currentSelected %= cards_in_hand.Count;
+            cards_in_hand[currentSelected].Select();
 
-        ResetHandSelection();
+            ResetHandSelection();
+        }
     }
 
     private List<CardBehaviour> GetHand()
