@@ -58,12 +58,17 @@ public class CardBehaviour : MonoBehaviour
         Deselect();
     }
 
+    public void Target()
+    {
+        GameObject.FindGameObjectWithTag("InputManger").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
+    }
+
     private void Awake()
     {
         initialSize = transform.localScale;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (selected)
         {

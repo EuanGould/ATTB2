@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     private bool button_held = false;
     private float button_held_duration = 0f;
 
-    [SerializeField] private InputtableBehaviour inputtable;
+    public InputtableBehaviour inputtable;
 
     public void ProcessInput(InputAction.CallbackContext context)
     {

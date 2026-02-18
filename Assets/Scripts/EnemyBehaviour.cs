@@ -29,4 +29,14 @@ public class EnemyBehaviour : MonoBehaviour
         health -= amount;
         updateHealth();
     }
+
+    public void Select()
+    {
+        Debug.Log(gameObject.name + " selected");
+    }
+
+    public void Deselect()
+    {
+        Debug.Log(gameObject.name + " deselected");
+    }
 }
