@@ -46,6 +46,11 @@ public class CardBehaviour : MonoBehaviour
         Discard();
     }
 
+    public virtual void targetPayoff(EnemyBehaviour enemy)
+    {
+        print("Targeted: " + enemy.gameObject.name);
+    }
+
     public void DrawNewCard()
     {
         GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();

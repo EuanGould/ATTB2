@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyManager : InputtableBehaviour
 {
+    public CardBehaviour current_card;
+    
     private enum State
     {
         Selecting,
@@ -26,8 +28,8 @@ public class EnemyManager : InputtableBehaviour
     {
         if (state == State.Selecting)
         {
-            // called when inputManager detects a held input
-
+            current_card.targetPayoff(enemies_in_fight[currentSelected]);
+            GameObject.FindGameObjectWithTag("InputManger").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
         }
     }
 
@@ -57,7 +59,7 @@ public class EnemyManager : InputtableBehaviour
             Debug.Log("VICTORY");
         }
 
-        // call whenever the number of cards in hand changes
+        // call whenever the number of enemies changes
         enemies_in_fight = GetEnemies();
 
         SanitiseCurrentSelection();
@@ -79,7 +81,7 @@ public class EnemyManager : InputtableBehaviour
 
     private List<EnemyBehaviour> GetEnemies()
     {
-        // gets all cards that are a child of this object
+        // gets all enemies that are a child of this object
         return new List<EnemyBehaviour>(GetComponentsInChildren<EnemyBehaviour>());
 
     }
