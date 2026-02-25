@@ -49,7 +49,6 @@ public class CardBehaviour : MonoBehaviour
     public virtual void targetPayoff(EnemyBehaviour enemy)
     {
         print("Targeted: " + enemy.gameObject.name);
-        GameObject.FindGameObjectWithTag("InputManger").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
     }
 
     public void DrawNewCard()
