@@ -29,17 +29,14 @@ public class EnemyManager : InputtableBehaviour
         if (state == State.Selecting)
         {
             current_card.targetPayoff(enemies_in_fight[currentSelected]);
-            GameObject.FindGameObjectWithTag("InputManger").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
+            GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
+            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
+            enemies_in_fight[currentSelected].Deselect();
         }
     }
 
     private void SanitiseCurrentSelection()
     {
-        if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
-        {
-            GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
-        }
-
         if (enemies_in_fight.Count <= currentSelected)
         {
             currentSelected = enemies_in_fight.Count - 1;

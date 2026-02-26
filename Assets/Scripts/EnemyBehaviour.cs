@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private RectTransform health_bar_fill;
     [SerializeField] private TextMeshProUGUI health_text;
+    [SerializeField] private Image selection_arrow;
 
     [SerializeField] private int max_health;
 
@@ -32,11 +34,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Select()
     {
-        Debug.Log(gameObject.name + " selected");
+        selection_arrow.enabled = true;
     }
 
     public void Deselect()
     {
-        Debug.Log(gameObject.name + " deselected");
+        selection_arrow.enabled = false;
     }
 }

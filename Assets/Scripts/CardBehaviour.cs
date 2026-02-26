@@ -6,6 +6,7 @@ public class CardBehaviour : MonoBehaviour
     // adjustable
     [SerializeField] float enlarge_factor = 1.2f;
     [SerializeField] float vertical_offset_on_selection = 200f;
+    [SerializeField] int time_cost = 0;
 
     // internal
     private bool selected = false;
@@ -65,7 +66,10 @@ public class CardBehaviour : MonoBehaviour
 
     public void Target()
     {
-        GameObject.FindGameObjectWithTag("InputManger").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
+        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().current_card = this;
+        GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DeselectAll();
+        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().ResetEnemySelection();
     }
 
     private void Awake()
@@ -79,5 +83,10 @@ public class CardBehaviour : MonoBehaviour
         {
             transform.localScale = initialSize * enlarge_factor + Vector2.one * Mathf.Abs(Mathf.Sin(Time.time * 2)) * 0.1f;
         }
+    }
+
+    public void RunCost()
+    {
+        GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(time_cost);
     }
 }

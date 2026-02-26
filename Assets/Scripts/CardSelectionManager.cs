@@ -28,13 +28,18 @@ public class CardSelectionManager : InputtableBehaviour
 
     private void PositionCards()
     {
-        float screen_size = Screen.width;
+        float screen_size = 2080;
         float gap = screen_size * 0.7f / cards_in_hand.Count;
 
         for (int i = 0; i < cards_in_hand.Count; i++)
         {
             cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition = new Vector2 (-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset());
         }
+    }
+
+    public void DeselectAll()
+    {
+        cards_in_hand[currentSelected].Deselect();
     }
 
     private void SanitiseCurrentSelection()
@@ -75,6 +80,8 @@ public class CardSelectionManager : InputtableBehaviour
         if (state == State.Selecting)
         {
             // called when inputManager detects a held input
+            cards_in_hand[currentSelected].RunCost();
+            print(GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().getTotalTime());
             cards_in_hand[currentSelected].Play();
             cards_in_hand.RemoveAt(currentSelected);
             SanitiseCurrentSelection();

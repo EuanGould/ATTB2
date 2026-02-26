@@ -10,6 +10,7 @@ TagManager:
   - DiscardPile
   - DeckPile
   - EnemiesLayer
+  - TimeManager
   layers:
   - Default
   - TransparentFX
