@@ -15,7 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private int attack_damage;
 
     private TimeManager time_manager;
-    private float health;
+    private int health;
 
     private int cooldown_start_time;
 
@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health_text.text = health + "/" + max_health;
 
-        health_bar_fill.localScale = new Vector2(health / max_health, 1);
+        health_bar_fill.localScale = new Vector2((float)health / (float)max_health, 1);
     }
 
     public virtual void damage(int amount)
@@ -57,7 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void Attack()
     {
-        print(gameObject.name + " attacks!");
+        GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().TakeDamage(attack_damage);
     }
 
     public void Select()

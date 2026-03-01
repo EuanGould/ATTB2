@@ -13,6 +13,12 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         health = starting_health;
+        health_text.text = health.ToString();
     }
 
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        health_text.text = health.ToString();
+    }
 }
