@@ -2048,7 +2048,7 @@ GameObject:
   - component: {fileID: 1437198362}
   m_Layer: 5
   m_Name: VFX
-  m_TagString: Untagged
+  m_TagString: VFXCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,7 +2062,7 @@ RectTransform:
   m_GameObject: {fileID: 1437198357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 127.34694}
-  m_LocalScale: {x: 0.0139082065, y: 0.0139082065, z: 0.0139082065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 287353793}
@@ -2147,6 +2147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf4f6b37354c2041acbd2bc335daf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage_vfx_prefab: {fileID: 5690097505101815925, guid: d0eb27954c8a97d47b4ea044f59b9f32, type: 3}
 --- !u!224 &1490439582 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5888513361735726657, guid: e431ce041c0f1754194c3772d062825a, type: 3}

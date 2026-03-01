@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class VFXManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject damage_vfx_prefab;
+    
+    public void CreateDamagePlayer(RectTransform origin)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject new_fx = Instantiate(damage_vfx_prefab);
+        new_fx.transform.SetParent(transform);
+        new_fx.GetComponent<RectTransform>().anchoredPosition = origin.anchoredPosition;
+        new_fx.GetComponent<DamageVFX>().SetGoal(new Vector2(-1150, -400));
     }
 }

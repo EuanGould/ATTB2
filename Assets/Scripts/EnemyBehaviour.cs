@@ -57,6 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void Attack()
     {
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamagePlayer(GetComponent<RectTransform>());
         GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().TakeDamage(attack_damage);
     }
 

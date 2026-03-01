@@ -12,6 +12,7 @@ TagManager:
   - EnemiesLayer
   - TimeManager
   - PlayerStats
+  - VFXCanvas
   layers:
   - Default
   - TransparentFX
