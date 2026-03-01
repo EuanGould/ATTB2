@@ -40,6 +40,7 @@ public class EnemyBehaviour : MonoBehaviour
         // called when taking damage
         health -= amount;
         updateHealth();
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageEnemy(GetComponent<RectTransform>());
     }
 
     public virtual void onTimeProgressed()
