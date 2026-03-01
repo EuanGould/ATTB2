@@ -12,5 +12,10 @@ public class TimeManager : MonoBehaviour
     public void addTotalTime(int amount)
     {
         total_time += amount;
+
+        foreach (EnemyBehaviour enemy in GameObject.FindGameObjectWithTag("EnemiesLayer").transform.GetComponentsInChildren<EnemyBehaviour>())
+        {
+            enemy.onTimeProgressed();
+        }
     }
 }

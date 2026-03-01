@@ -7,15 +7,25 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private RectTransform health_bar_fill;
     [SerializeField] private TextMeshProUGUI health_text;
     [SerializeField] private Image selection_arrow;
+    [SerializeField] private TextMeshProUGUI countdown_text;
 
+    // adjustables
     [SerializeField] private int max_health;
+    [SerializeField] private int attack_cooldown;
+    [SerializeField] private int attack_damage;
 
+    private TimeManager time_manager;
     private float health;
+
+    private int cooldown_start_time;
 
     private void Awake()
     {
         health = max_health;
         updateHealth();
+        time_manager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+        cooldown_start_time = time_manager.getTotalTime();
+        countdown_text.text = attack_cooldown.ToString();
     }
 
     public void updateHealth()
@@ -30,6 +40,24 @@ public class EnemyBehaviour : MonoBehaviour
         // called when taking damage
         health -= amount;
         updateHealth();
+    }
+
+    public virtual void onTimeProgressed()
+    {
+        int current_time = time_manager.getTotalTime();
+
+        while (current_time >= cooldown_start_time + attack_cooldown)
+        {
+            Attack();
+            cooldown_start_time += attack_cooldown;
+        }
+
+        countdown_text.text = (attack_cooldown - current_time + cooldown_start_time).ToString();
+    }
+
+    public virtual void Attack()
+    {
+        print(gameObject.name + " attacks!");
     }
 
     public void Select()

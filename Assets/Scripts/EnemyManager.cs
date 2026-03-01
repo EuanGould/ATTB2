@@ -22,6 +22,7 @@ public class EnemyManager : InputtableBehaviour
     {
         enemies_in_fight = GetEnemies();
         ResetEnemySelection();
+        enemies_in_fight[currentSelected].Deselect();
     }
 
     public override void OnSingleButtonHeld()

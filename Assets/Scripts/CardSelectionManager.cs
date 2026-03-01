@@ -80,6 +80,7 @@ public class CardSelectionManager : InputtableBehaviour
         if (state == State.Selecting)
         {
             // called when inputManager detects a held input
+            state = State.Watching;
             cards_in_hand[currentSelected].RunCost();
             print(GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().getTotalTime());
             cards_in_hand[currentSelected].Play();
@@ -87,6 +88,7 @@ public class CardSelectionManager : InputtableBehaviour
             SanitiseCurrentSelection();
             PositionCards();
             cards_in_hand[currentSelected].Select();
+            state = State.Selecting;
         }
     }
 
