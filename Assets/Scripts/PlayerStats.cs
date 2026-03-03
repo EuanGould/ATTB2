@@ -27,4 +27,9 @@ public class PlayerStats : MonoBehaviour
         health = starting_health;
         health_text.text = health.ToString();
     }
+
+    private void FixedUpdate()
+    {
+        health_text.text = health.ToString();
+    }
 }
