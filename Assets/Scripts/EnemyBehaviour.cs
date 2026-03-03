@@ -41,6 +41,11 @@ public class EnemyBehaviour : MonoBehaviour
         health -= amount;
         updateHealth();
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageEnemy(GetComponent<RectTransform>());
+
+        if (health <= 0)
+        {
+            transform.parent.GetComponent<EnemyManager>().EnemyDeath(this);
+        }
     }
 
     public virtual void onTimeProgressed()

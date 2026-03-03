@@ -65,6 +65,7 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
         {
+            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(5);
             GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
         }
 
@@ -82,7 +83,6 @@ public class CardSelectionManager : InputtableBehaviour
             // called when inputManager detects a held input
             state = State.Watching;
             cards_in_hand[currentSelected].RunCost();
-            print(GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().getTotalTime());
             cards_in_hand[currentSelected].Play();
             cards_in_hand.RemoveAt(currentSelected);
             SanitiseCurrentSelection();

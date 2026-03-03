@@ -21,4 +21,10 @@ public class PlayerStats : MonoBehaviour
         health -= amount;
         health_text.text = health.ToString();
     }
+
+    public void ResetPlayerStats()
+    {
+        health = starting_health;
+        health_text.text = health.ToString();
+    }
 }
