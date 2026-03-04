@@ -28,6 +28,11 @@ public class EnemyBehaviour : MonoBehaviour
         countdown_text.text = attack_cooldown.ToString();
     }
 
+    public void OnSpawning()
+    {
+        cooldown_start_time = time_manager.getTotalTime();
+    }
+
     public void updateHealth()
     {
         health_text.text = health + "/" + max_health;
@@ -63,6 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void Attack()
     {
+
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamagePlayer(GetComponent<RectTransform>());
         GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().TakeDamage(attack_damage);
     }

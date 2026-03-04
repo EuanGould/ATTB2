@@ -115,6 +115,7 @@ public class EnemyManager : InputtableBehaviour
             foreach (EnemyBehaviour new_enemy in enemies_in_wait.GetComponentsInChildren<EnemyBehaviour>())
             {
                 new_enemy.transform.SetParent(transform);
+                new_enemy.OnSpawning();
             }
 
             wave_index++;
@@ -124,6 +125,7 @@ public class EnemyManager : InputtableBehaviour
 
             enemies_in_fight = GetEnemies();
             PositionEnemies();
+
         }
 
         enemies_in_fight = GetEnemies();

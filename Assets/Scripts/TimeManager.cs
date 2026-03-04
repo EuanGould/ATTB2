@@ -18,4 +18,5 @@ public class TimeManager : MonoBehaviour
             enemy.onTimeProgressed();
         }
     }
+
 }
