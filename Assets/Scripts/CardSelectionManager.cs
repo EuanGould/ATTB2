@@ -39,7 +39,7 @@ public class CardSelectionManager : InputtableBehaviour
 
         for (int i = 0; i < cards_in_hand.Count; i++)
         {
-            cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition += 5 * Time.fixedDeltaTime * ((new Vector2 (-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset())) - cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition);
+            cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition += 5 * Time.fixedDeltaTime * ((new Vector2(-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset())) - cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition);
         }
     }
 
@@ -86,6 +86,13 @@ public class CardSelectionManager : InputtableBehaviour
         GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
     }
 
+    public void FinishResolution()
+    {
+        cards_in_hand.RemoveAt(currentSelected);
+        SanitiseCurrentSelection();
+        state = State.Selecting;
+    }
+
     public override void OnSingleButtonHeld()
     {
         if (state == State.Selecting)
@@ -93,11 +100,7 @@ public class CardSelectionManager : InputtableBehaviour
             // called when inputManager detects a held input
             state = State.Watching;
             cards_in_hand[currentSelected].RunCost();
-            cards_in_hand[currentSelected].Play();
-            cards_in_hand.RemoveAt(currentSelected);
-            SanitiseCurrentSelection();
-            cards_in_hand[currentSelected].Select();
-            state = State.Selecting;
+            cards_in_hand[currentSelected].InvokePlay();
         }
     }
 
@@ -153,5 +156,10 @@ public class CardSelectionManager : InputtableBehaviour
         }
 
         UpdateDeckAndDiscardPileText();
+    }
+
+    public bool getWatching()
+    {
+        return state == State.Watching;
     }
 }

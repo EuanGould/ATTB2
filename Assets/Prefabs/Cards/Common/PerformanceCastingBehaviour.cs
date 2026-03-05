@@ -6,6 +6,6 @@ public class PerformanceCastingBehaviour : CardBehaviour
     {
         DrawNewCard();
         DrawNewCard();
-        Discard();
+        FinishPlaying();
     }
 }

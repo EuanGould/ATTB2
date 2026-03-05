@@ -9,6 +9,6 @@ public class MassDestructionBehaviour : CardBehaviour
             enemy.damage(30);
         }
 
-        Discard();
+        FinishPlaying();
     }
 }

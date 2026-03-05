@@ -7,6 +7,6 @@ public class AdvancedKnowledgeBehaviour : CardBehaviour
         DrawNewCard();
         DrawNewCard();
         DrawNewCard();
-        Discard();
+        FinishPlaying();
     }
 }

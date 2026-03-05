@@ -9,6 +9,6 @@ public class IncredibleStrengthBehaviour : CardBehaviour
             enemy.damage(2);
         }
 
-        Discard();
+        FinishPlaying();
     }
 }

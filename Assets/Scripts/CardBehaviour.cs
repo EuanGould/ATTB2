@@ -13,6 +13,8 @@ public class CardBehaviour : MonoBehaviour
     private Vector2 initialSize;
     private float y_offset = 0f;
 
+    private float play_delay = 0.1f;
+
     public EnemyBehaviour[] GetEnemies()
     {
         return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
@@ -44,7 +46,13 @@ public class CardBehaviour : MonoBehaviour
     public virtual void Play()
     {
         print("Hello World");
-        Discard();
+        FinishPlaying();
+    }
+
+    public void InvokePlay()
+    {
+        Invoke("Play", play_delay);
+        play_delay = 0.1f;
     }
 
     public virtual void targetPayoff(EnemyBehaviour enemy)
@@ -63,7 +71,6 @@ public class CardBehaviour : MonoBehaviour
         // called when the card needs to go to the discard pile
 
         transform.SetParent(GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<RectTransform>());
-        Deselect();
 
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
@@ -72,7 +79,6 @@ public class CardBehaviour : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().current_card = this;
         GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
-        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DeselectAll();
         GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().ResetEnemySelection();
     }
 
@@ -91,6 +97,13 @@ public class CardBehaviour : MonoBehaviour
 
     public void RunCost()
     {
-        GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(time_cost);
+        play_delay = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(time_cost);
+    }
+
+    public void FinishPlaying()
+    {
+        Deselect();
+        Discard();
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().FinishResolution();
     }
 }

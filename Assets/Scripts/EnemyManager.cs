@@ -39,12 +39,19 @@ public class EnemyManager : InputtableBehaviour
     {
         if (state == State.Selecting)
         {
-            current_card.targetPayoff(enemies_in_fight[currentSelected]);
-            GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
-            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
-            enemies_in_fight[currentSelected].Deselect();
-            current_card = null;
+            state = State.Watching;
+            Invoke("InvokableTargetPayoff", 0.2f);
         }
+    }
+
+    private void InvokableTargetPayoff()
+    {
+        current_card.targetPayoff(enemies_in_fight[currentSelected]);
+        GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
+        enemies_in_fight[currentSelected].Deselect();
+        current_card = null;
+        state = State.Selecting;
     }
 
     private void SanitiseCurrentSelection()

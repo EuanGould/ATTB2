@@ -54,17 +54,26 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    public virtual void onTimeProgressed()
+    public virtual float onTimeProgressed()
     {
+        float delay_to_add = 0.0f;
         int current_time = time_manager.getTotalTime();
 
         while (current_time >= cooldown_start_time + attack_cooldown)
         {
-            Attack();
+            InvokeAttack(delay_to_add);
             cooldown_start_time += attack_cooldown;
+            delay_to_add += 0.2f;
         }
 
         countdown_text.text = (attack_cooldown - current_time + cooldown_start_time).ToString();
+
+        return delay_to_add;
+    }
+
+    private void InvokeAttack(float delay)
+    {
+        Invoke("Attack", delay);
     }
 
     public virtual void Attack()
