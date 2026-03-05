@@ -127,6 +127,7 @@ public class EnemyManager : InputtableBehaviour
             enemies_in_fight = GetEnemies();
             PositionEnemies();
 
+            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DrawFreshHand();
         }
 
         enemies_in_fight = GetEnemies();

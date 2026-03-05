@@ -24,8 +24,7 @@ public class CardSelectionManager : InputtableBehaviour
     void Awake()
     {
         cards_in_hand = GetHand();
-        ResetHandSelection();
-        UpdateDeckAndDiscardPileText();
+        DrawFreshHand();
     }
 
     private void FixedUpdate()
@@ -82,6 +81,11 @@ public class CardSelectionManager : InputtableBehaviour
         SanitiseCurrentSelection();
     }
 
+    public void DrawNewCard()
+    {
+        GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+    }
+
     public override void OnSingleButtonHeld()
     {
         if (state == State.Selecting)
@@ -125,5 +129,29 @@ public class CardSelectionManager : InputtableBehaviour
 
         deckPileText.text = GameObject.FindGameObjectWithTag("DeckPile").transform.childCount.ToString() + " Cards in Deck";
         discardPileText.text = GameObject.FindGameObjectWithTag("DiscardPile").transform.childCount.ToString() + " Cards in Discard";
+    }
+
+    public void DrawFreshHand(int amount = 5)
+    {
+        foreach (CardBehaviour card in cards_in_hand)
+        {
+            card.Deselect();
+            card.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
+        }
+
+        foreach (CardBehaviour card in GameObject.FindGameObjectWithTag("DiscardPile").transform.GetComponentsInChildren<CardBehaviour>())
+        {
+            card.Deselect();
+            card.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
+        }
+
+        cards_in_hand = GetHand();
+
+        for (int i = 0; i < amount; i++)
+        {
+            DrawNewCard();
+        }
+
+        UpdateDeckAndDiscardPileText();
     }
 }
