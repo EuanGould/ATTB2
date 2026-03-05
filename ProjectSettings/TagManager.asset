@@ -13,6 +13,9 @@ TagManager:
   - TimeManager
   - PlayerStats
   - VFXCanvas
+  - DeckPileText
+  - DiscardPileText
+  - ActiveZone
   layers:
   - Default
   - TransparentFX

@@ -43,6 +43,7 @@ public class EnemyManager : InputtableBehaviour
             GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
             GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
             enemies_in_fight[currentSelected].Deselect();
+            current_card = null;
         }
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class CardSelectionManager : InputtableBehaviour
 {
@@ -24,6 +25,12 @@ public class CardSelectionManager : InputtableBehaviour
     {
         cards_in_hand = GetHand();
         ResetHandSelection();
+        UpdateDeckAndDiscardPileText();
+    }
+
+    private void FixedUpdate()
+    {
+        PositionCards();
     }
 
     private void PositionCards()
@@ -33,7 +40,7 @@ public class CardSelectionManager : InputtableBehaviour
 
         for (int i = 0; i < cards_in_hand.Count; i++)
         {
-            cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition = new Vector2 (-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset());
+            cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition += 5 * Time.fixedDeltaTime * ((new Vector2 (-screen_size * 0.35f + gap * (i + 0.5f), 150 + cards_in_hand[i].GetYOffset())) - cards_in_hand[i].GetComponent<RectTransform>().anchoredPosition);
         }
     }
 
@@ -73,7 +80,6 @@ public class CardSelectionManager : InputtableBehaviour
         cards_in_hand = GetHand();
         
         SanitiseCurrentSelection();
-        PositionCards();
     }
 
     public override void OnSingleButtonHeld()
@@ -86,7 +92,6 @@ public class CardSelectionManager : InputtableBehaviour
             cards_in_hand[currentSelected].Play();
             cards_in_hand.RemoveAt(currentSelected);
             SanitiseCurrentSelection();
-            PositionCards();
             cards_in_hand[currentSelected].Select();
             state = State.Selecting;
         }
@@ -111,5 +116,14 @@ public class CardSelectionManager : InputtableBehaviour
 
         // gets all cards that are a child of this object
         return new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>());
+    }
+
+    public void UpdateDeckAndDiscardPileText()
+    {
+        TextMeshProUGUI deckPileText = GameObject.FindGameObjectWithTag("DeckPileText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI discardPileText = GameObject.FindGameObjectWithTag("DiscardPileText").GetComponent<TextMeshProUGUI>(); ;
+
+        deckPileText.text = GameObject.FindGameObjectWithTag("DeckPile").transform.childCount.ToString() + " Cards in Deck";
+        discardPileText.text = GameObject.FindGameObjectWithTag("DiscardPile").transform.childCount.ToString() + " Cards in Discard";
     }
 }

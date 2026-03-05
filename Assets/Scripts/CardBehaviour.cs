@@ -55,13 +55,17 @@ public class CardBehaviour : MonoBehaviour
     public void DrawNewCard()
     {
         GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
 
     public void Discard()
     {
         // called when the card needs to go to the discard pile
+
         transform.SetParent(GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<RectTransform>());
         Deselect();
+
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
 
     public void Target()
