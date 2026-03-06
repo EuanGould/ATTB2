@@ -16,6 +16,7 @@ TagManager:
   - DeckPileText
   - DiscardPileText
   - ActiveZone
+  - PlayerRectPos
   layers:
   - Default
   - TransparentFX
