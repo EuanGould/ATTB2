@@ -105,5 +105,6 @@ public class CardBehaviour : MonoBehaviour
         Deselect();
         Discard();
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().FinishResolution();
+        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().DeathCheckAll();
     }
 }

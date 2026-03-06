@@ -7,6 +7,11 @@ public class DeckPile : MonoBehaviour
         PositionCards();
     }
 
+    private void Awake()
+    {
+        InitialPositionCards();
+    }
+
     private void PositionCards()
     {
         float screen_width = 2080;
@@ -17,6 +22,19 @@ public class DeckPile : MonoBehaviour
         for (int i = 0; i < cards.Length; i++)
         {
             cards[i].GetComponent<RectTransform>().anchoredPosition += 5 * Time.fixedDeltaTime * (destinaton - cards[i].GetComponent<RectTransform>().anchoredPosition);
+        }
+    }
+
+    private void InitialPositionCards()
+    {
+        float screen_width = 2080;
+        Vector2 destinaton = new Vector2(screen_width * 2, 0);
+
+        CardBehaviour[] cards = GetComponentsInChildren<CardBehaviour>();
+
+        for (int i = 0; i < cards.Length; i++)
+        {
+            cards[i].GetComponent<RectTransform>().anchoredPosition = destinaton;
         }
     }
 

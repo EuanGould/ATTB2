@@ -49,7 +49,10 @@ public class EnemyManager : InputtableBehaviour
         current_card.targetPayoff(enemies_in_fight[currentSelected]);
         GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
-        enemies_in_fight[currentSelected].Deselect();
+        if (enemies_in_fight.Count > currentSelected)
+        {
+            enemies_in_fight[currentSelected].Deselect();
+        }
         current_card = null;
         state = State.Selecting;
     }
@@ -115,9 +118,9 @@ public class EnemyManager : InputtableBehaviour
 
     public void EnemyDeath(EnemyBehaviour enemy)
     {
-
+        enemy.InvokeDeath(0.3f);
         enemy.gameObject.transform.SetParent(enemy_graveyard.transform);
-        Destroy(enemy.gameObject);
+
         if (enemies_in_fight.Count <= 1)
         {
             foreach (EnemyBehaviour new_enemy in enemies_in_wait.GetComponentsInChildren<EnemyBehaviour>())
@@ -138,7 +141,13 @@ public class EnemyManager : InputtableBehaviour
         }
 
         enemies_in_fight = GetEnemies();
+    }
 
-
+    public void DeathCheckAll()
+    {
+        foreach (EnemyBehaviour enemy in GetComponentsInChildren<EnemyBehaviour>())
+        {
+            enemy.DeathCheck();
+        }
     }
 }

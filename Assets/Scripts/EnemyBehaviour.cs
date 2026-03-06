@@ -47,7 +47,10 @@ public class EnemyBehaviour : MonoBehaviour
         health -= amount;
         updateHealth();
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageEnemy(GetComponent<RectTransform>());
+    }
 
+    public void DeathCheck()
+    {
         if (health <= 0)
         {
             transform.parent.GetComponent<EnemyManager>().EnemyDeath(this);
@@ -91,5 +94,24 @@ public class EnemyBehaviour : MonoBehaviour
     public void Deselect()
     {
         selection_arrow.enabled = false;
+    }
+
+    public void DelayAttack(int value)
+    {
+        attack_cooldown += value;
+        countdown_text.text = (attack_cooldown - time_manager.getTotalTime() + cooldown_start_time).ToString();
+    }
+
+    public void InvokeDeath(float time)
+    {
+        print("DEATH INVOKED");
+        Invoke("InvokableDeath", time);
+    }
+
+    private void InvokableDeath()
+    {
+        Deselect();
+        Destroy(this.gameObject);
+
     }
 }
