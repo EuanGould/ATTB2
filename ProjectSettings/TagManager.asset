@@ -17,6 +17,7 @@ TagManager:
   - DiscardPileText
   - ActiveZone
   - PlayerRectPos
+  - CardAddingUI
   layers:
   - Default
   - TransparentFX

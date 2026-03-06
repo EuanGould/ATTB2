@@ -123,21 +123,7 @@ public class EnemyManager : InputtableBehaviour
 
         if (enemies_in_fight.Count <= 1)
         {
-            foreach (EnemyBehaviour new_enemy in enemies_in_wait.GetComponentsInChildren<EnemyBehaviour>())
-            {
-                new_enemy.transform.SetParent(transform);
-                new_enemy.OnSpawning();
-            }
-
-            wave_index++;
-            enemies_in_wait = waves[wave_index];
-
-            GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().ResetPlayerStats();
-
-            enemies_in_fight = GetEnemies();
-            PositionEnemies();
-
-            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DrawFreshHand();
+            GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().OfferChoice();
         }
 
         enemies_in_fight = GetEnemies();
@@ -149,5 +135,24 @@ public class EnemyManager : InputtableBehaviour
         {
             enemy.DeathCheck();
         }
+    }
+
+    public void NextWave()
+    {
+        foreach (EnemyBehaviour new_enemy in enemies_in_wait.GetComponentsInChildren<EnemyBehaviour>())
+        {
+            new_enemy.transform.SetParent(transform);
+            new_enemy.OnSpawning();
+        }
+
+        wave_index++;
+        enemies_in_wait = waves[wave_index];
+
+        GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().ResetPlayerStats();
+
+        enemies_in_fight = GetEnemies();
+        PositionEnemies();
+
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DrawFreshHand();
     }
 }
