@@ -1,17 +1,23 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardBehaviour : MonoBehaviour
 {
     // adjustable
     [SerializeField] float enlarge_factor = 1.2f;
     [SerializeField] float vertical_offset_on_selection = 200f;
-    [SerializeField] int time_cost = 0;
+    [SerializeField] int starting_time_cost = 0;
+    [SerializeField] TextMeshProUGUI cost_text;
+    [SerializeField] Image clockface;
 
     // internal
     private bool selected = false;
     private Vector2 initialSize;
     private float y_offset = 0f;
+
+    private int time_cost = 0;
 
     private float play_delay = 0.1f;
 
@@ -85,6 +91,9 @@ public class CardBehaviour : MonoBehaviour
     private void Awake()
     {
         initialSize = transform.localScale;
+        time_cost = starting_time_cost;
+        cost_text.text = time_cost.ToString();
+
     }
 
     private void FixedUpdate()
@@ -106,5 +115,45 @@ public class CardBehaviour : MonoBehaviour
         Discard();
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().FinishResolution();
         GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().DeathCheckAll();
+    }
+
+    public void ResetValues()
+    {
+        time_cost = starting_time_cost;
+        UpdateCostText();
+    }
+
+    public void AddCost(int value)
+    {
+        time_cost += value;
+        UpdateCostText();
+    }
+
+    public void SetCost(int value)
+    {
+        time_cost = value;
+        UpdateCostText();
+    }
+
+    private void UpdateCostText()
+    {
+        Color clockFaceDefault = new Color(1, 1, 1);
+        Color textDefault = new Color(0, 0, 0);
+
+        Color clockFaceNegative = new Color(0.76f, 1, 0.82f);
+        Color textNegative = new Color(0, 0.33f, 0);
+
+        cost_text.text = time_cost.ToString();
+
+        if (time_cost > 0)
+        {
+            cost_text.color = textDefault;
+            clockface.color = clockFaceDefault;
+        }
+        else
+        {
+            cost_text.color = textNegative;
+            clockface.color = clockFaceNegative;
+        }
     }
 }

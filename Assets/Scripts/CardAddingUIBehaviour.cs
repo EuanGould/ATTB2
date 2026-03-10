@@ -33,6 +33,8 @@ public class CardAddingUIBehaviour : InputtableBehaviour
 
     private void OfferChoice()
     {
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetDeck();
+
         active = true;
         
         background.enabled = true;

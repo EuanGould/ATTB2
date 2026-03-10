@@ -55,7 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enlarge_factor: 1.2
   vertical_offset_on_selection: 200
-  time_cost: -8
+  starting_time_cost: -8
+  cost_text: {fileID: 2516656321291996668}
+  clockface: {fileID: 7899177490453787445}
 --- !u!1 &2231846288883346832
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113.98, y: 147.6}
+  m_AnchoredPosition: {x: 108.80001, y: 147.6}
   m_SizeDelta: {x: 64.3383, y: 50.6252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8635427868589762039
@@ -461,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.759434, g: 1, b: 0.81037736, a: 1}
+  m_Color: {r: 0.759434, g: 1, b: 0.81774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

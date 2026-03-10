@@ -125,7 +125,7 @@ public class EnemyManager : InputtableBehaviour
         if (enemies_in_fight.Count <= 1)
         {
             cardsOffered = 0;
-            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ShuffleAwayAll();
+            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetDeck();
             GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().InvokeOfferChoice();
         }
 
@@ -171,5 +171,7 @@ public class EnemyManager : InputtableBehaviour
         PositionEnemies();
 
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DrawFreshHand();
+
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().setWatching(false);
     }
 }

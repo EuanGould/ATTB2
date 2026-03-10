@@ -69,7 +69,7 @@ public class CardSelectionManager : InputtableBehaviour
 
     public void ResetHandSelection()
     {
-        if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
+        if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0 && state == State.Selecting)
         {
             GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(5);
             GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
@@ -125,6 +125,17 @@ public class CardSelectionManager : InputtableBehaviour
         return new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>());
     }
 
+    public void ResetDeck()
+    {
+        state = State.Watching;
+        ShuffleAwayAll();
+
+        foreach(CardBehaviour card in GameObject.FindGameObjectWithTag("DeckPile").GetComponentsInChildren<CardBehaviour>())
+        {
+            card.ResetValues();
+        }
+    }
+
     public void ShuffleAwayAll()
     {
         foreach (CardBehaviour card in cards_in_hand)
@@ -138,6 +149,7 @@ public class CardSelectionManager : InputtableBehaviour
             card.Deselect();
             card.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
         }
+
     }
 
     public void UpdateDeckAndDiscardPileText()
@@ -166,5 +178,17 @@ public class CardSelectionManager : InputtableBehaviour
     public bool getWatching()
     {
         return state == State.Watching;
+    }
+
+    public void setWatching(bool watching)
+    {
+        if (watching)
+        {
+            state = State.Watching;
+        }
+        else
+        {
+            state = State.Selecting;
+        }
     }
 }

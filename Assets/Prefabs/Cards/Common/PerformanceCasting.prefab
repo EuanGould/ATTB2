@@ -55,7 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enlarge_factor: 1.2
   vertical_offset_on_selection: 200
-  time_cost: 4
+  starting_time_cost: 4
+  cost_text: {fileID: 7875050567431561654}
+  clockface: {fileID: 8182596822334611427}
 --- !u!1 &2231846288883346832
 GameObject:
   m_ObjectHideFlags: 0
