@@ -84,6 +84,7 @@ public class CardSelectionManager : InputtableBehaviour
     public void DrawNewCard()
     {
         GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
 
     public void FinishResolution()

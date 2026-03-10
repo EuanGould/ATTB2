@@ -69,7 +69,6 @@ public class CardBehaviour : MonoBehaviour
     public void DrawNewCard()
     {
         GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
-        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
 
     public void Discard()

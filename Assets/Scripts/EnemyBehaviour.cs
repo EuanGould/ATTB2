@@ -1,5 +1,6 @@
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health_text.text = health + "/" + max_health;
 
-        health_bar_fill.localScale = new Vector2((float)health / (float)max_health, 1);
+        health_bar_fill.localScale = new Vector2(Mathf.Max(0, (float)health / (float)max_health), 1);
     }
 
     public virtual void damage(int amount)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DeckPile : MonoBehaviour
 {
@@ -43,7 +44,16 @@ public class DeckPile : MonoBehaviour
         
         if (GetComponentsInChildren<CardBehaviour>().Length == 0)
         {
-            GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<DiscardPile>().ShuffleIntoDeck();
+            if (GameObject.FindGameObjectWithTag("DiscardPile").GetComponentsInChildren<CardBehaviour>().Length == 0)
+            {
+                return;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<DiscardPile>().ShuffleIntoDeck();
+            }
+
+
         }
 
         CardBehaviour[] cards = GetComponentsInChildren<CardBehaviour>();
