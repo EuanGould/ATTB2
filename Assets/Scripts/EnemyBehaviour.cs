@@ -104,7 +104,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void InvokeDeath(float time)
     {
-        print("DEATH INVOKED");
         Invoke("InvokableDeath", time);
     }
 

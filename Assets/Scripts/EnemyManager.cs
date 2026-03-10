@@ -20,6 +20,7 @@ public class EnemyManager : InputtableBehaviour
 
     // internal variables
     private int currentSelected = 0;
+    private int cardsOffered = 0;
 
     private List<EnemyBehaviour> enemies_in_fight;
 
@@ -123,7 +124,9 @@ public class EnemyManager : InputtableBehaviour
 
         if (enemies_in_fight.Count <= 1)
         {
-            GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().OfferChoice();
+            cardsOffered = 0;
+            GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ShuffleAwayAll();
+            GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().InvokeOfferChoice();
         }
 
         enemies_in_fight = GetEnemies();
@@ -137,7 +140,21 @@ public class EnemyManager : InputtableBehaviour
         }
     }
 
-    public void NextWave()
+    public void GoNext()
+    {
+        cardsOffered++;
+
+        if (cardsOffered >= 3)
+        {
+            NextWave();
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().InvokeOfferChoice();
+        }
+    }
+
+    private void NextWave()
     {
         foreach (EnemyBehaviour new_enemy in enemies_in_wait.GetComponentsInChildren<EnemyBehaviour>())
         {

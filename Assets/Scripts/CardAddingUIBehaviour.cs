@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardAddingUIBehaviour : InputtableBehaviour
 {
@@ -10,19 +11,32 @@ public class CardAddingUIBehaviour : InputtableBehaviour
     [SerializeField] private RectTransform choice_b_transform;
     [SerializeField] private RectTransform choice_c_transform;
 
+    [SerializeField] private Image background;
+
     GameObject choice_a;
     GameObject choice_b;
     GameObject choice_c;
     
     private int selection_index = 1;
 
+    private bool active = false;
+
     private void Awake()
     {
         
     }
 
-    public void OfferChoice()
+    public void InvokeOfferChoice()
     {
+        Invoke("OfferChoice", 0.5f);
+    }
+
+    private void OfferChoice()
+    {
+        active = true;
+        
+        background.enabled = true;
+        
         int choice_a_id = Random.Range(0, card_pool.Length);
 
         int choice_b_id = Random.Range(0, card_pool.Length);
@@ -57,6 +71,7 @@ public class CardAddingUIBehaviour : InputtableBehaviour
 
     public void ProcessSelection()
     {
+        
         if (selection_index == 0)
         {
             choice_a.GetComponent<CardBehaviour>().Select();
@@ -79,42 +94,54 @@ public class CardAddingUIBehaviour : InputtableBehaviour
 
     public override void OnSingleButtonHeld()
     {
-        if (selection_index == 0)
+        if (active)
         {
-            choice_a.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
-            choice_a.GetComponent<CardBehaviour>().Deselect();
-        }
-        else if (selection_index == 1)
-        {
-            choice_b.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
-            choice_b.GetComponent<CardBehaviour>().Deselect();
-        }
-        else
-        {
-            choice_c.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
-            choice_c.GetComponent<CardBehaviour>().Deselect();
+
+            if (selection_index == 0)
+            {
+                choice_a.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
+                choice_a.GetComponent<CardBehaviour>().Deselect();
+            }
+            else if (selection_index == 1)
+            {
+                choice_b.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
+                choice_b.GetComponent<CardBehaviour>().Deselect();
+            }
+            else
+            {
+                choice_c.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
+                choice_c.GetComponent<CardBehaviour>().Deselect();
+            }
+
+            FinishUp();
         }
 
-        FinishUp();
     }
 
     public override void OnSingleButtonTapped()
     {
-        selection_index++;
-        selection_index %= 3;
+        if (active)
+        {
+            selection_index++;
+            selection_index %= 3;
 
-        ProcessSelection();
+            ProcessSelection();
+        }
     }
 
     public void FinishUp()
     {
+        active = false;
+        
         foreach (CardBehaviour card in transform.GetComponentsInChildren<CardBehaviour>())
         {
             Destroy(card.gameObject);
         }
 
+        background.enabled = false;
+
         GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<InputtableBehaviour>();
 
-        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().NextWave();
+        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().GoNext();
     }
 }

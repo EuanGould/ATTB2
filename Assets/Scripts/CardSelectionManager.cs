@@ -125,16 +125,7 @@ public class CardSelectionManager : InputtableBehaviour
         return new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>());
     }
 
-    public void UpdateDeckAndDiscardPileText()
-    {
-        TextMeshProUGUI deckPileText = GameObject.FindGameObjectWithTag("DeckPileText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI discardPileText = GameObject.FindGameObjectWithTag("DiscardPileText").GetComponent<TextMeshProUGUI>(); ;
-
-        deckPileText.text = GameObject.FindGameObjectWithTag("DeckPile").transform.childCount.ToString() + " Cards in Deck";
-        discardPileText.text = GameObject.FindGameObjectWithTag("DiscardPile").transform.childCount.ToString() + " Cards in Discard";
-    }
-
-    public void DrawFreshHand(int amount = 5)
+    public void ShuffleAwayAll()
     {
         foreach (CardBehaviour card in cards_in_hand)
         {
@@ -147,6 +138,20 @@ public class CardSelectionManager : InputtableBehaviour
             card.Deselect();
             card.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
         }
+    }
+
+    public void UpdateDeckAndDiscardPileText()
+    {
+        TextMeshProUGUI deckPileText = GameObject.FindGameObjectWithTag("DeckPileText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI discardPileText = GameObject.FindGameObjectWithTag("DiscardPileText").GetComponent<TextMeshProUGUI>(); ;
+
+        deckPileText.text = GameObject.FindGameObjectWithTag("DeckPile").transform.childCount.ToString() + " Cards in Deck";
+        discardPileText.text = GameObject.FindGameObjectWithTag("DiscardPile").transform.childCount.ToString() + " Cards in Discard";
+    }
+
+    public void DrawFreshHand(int amount = 5)
+    {
+        ShuffleAwayAll();
 
         cards_in_hand = GetHand();
 
