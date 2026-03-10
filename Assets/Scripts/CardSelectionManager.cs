@@ -29,6 +29,7 @@ public class CardSelectionManager : InputtableBehaviour
 
     private void FixedUpdate()
     {
+        cards_in_hand = GetHand();
         PositionCards();
     }
 
@@ -55,6 +56,11 @@ public class CardSelectionManager : InputtableBehaviour
             GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
         }
 
+        foreach (CardBehaviour card in GetComponentsInChildren<CardBehaviour>())
+        {
+
+        }
+
         if (cards_in_hand.Count <= currentSelected)
         {
             currentSelected = cards_in_hand.Count - 1;
@@ -79,6 +85,8 @@ public class CardSelectionManager : InputtableBehaviour
         cards_in_hand = GetHand();
         
         SanitiseCurrentSelection();
+
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
 
     public void DrawNewCard()

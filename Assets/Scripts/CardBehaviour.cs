@@ -76,6 +76,7 @@ public class CardBehaviour : MonoBehaviour
         // called when the card needs to go to the discard pile
 
         transform.SetParent(GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<RectTransform>());
+        Deselect();
 
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
     }
@@ -132,6 +133,11 @@ public class CardBehaviour : MonoBehaviour
     {
         time_cost = value;
         UpdateCostText();
+    }
+
+    public int GetCost()
+    {
+        return time_cost;
     }
 
     private void UpdateCostText()

@@ -35,6 +35,7 @@ public class DiscardPile : MonoBehaviour
         for (int i = 0; i < cards.Length; i++)
         {
             cards[i].GetComponent<RectTransform>().SetParent(deck_pile.GetComponent<RectTransform>());
+            cards[i].GetComponent<CardBehaviour>().Deselect();
         }
     }
 }
