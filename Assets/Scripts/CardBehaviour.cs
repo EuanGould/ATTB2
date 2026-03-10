@@ -21,6 +21,8 @@ public class CardBehaviour : MonoBehaviour
 
     private float play_delay = 0.1f;
 
+    private bool is_temporary_card = false;
+
     public EnemyBehaviour[] GetEnemies()
     {
         return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
@@ -121,6 +123,15 @@ public class CardBehaviour : MonoBehaviour
     {
         time_cost = starting_time_cost;
         UpdateCostText();
+        if (is_temporary_card)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void SetIsTemporaryCard(bool value)
+    {
+        is_temporary_card = value;
     }
 
     public void AddCost(int value)

@@ -21,6 +21,8 @@ public class SecondAttemptBehaviour : CardBehaviour
             DrawNewCard();
         }
 
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().DeselectAll();
+
         FinishPlaying();
     }
 }

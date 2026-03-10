@@ -146,4 +146,9 @@ public class CardAddingUIBehaviour : InputtableBehaviour
 
         GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().GoNext();
     }
+
+    public GameObject[] GetCardPool()
+    {
+        return card_pool;
+    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArcaneBlast : CardBehaviour
+public class ArcaneBlastBehaviour : CardBehaviour
 {
     public override void Play()
     {
