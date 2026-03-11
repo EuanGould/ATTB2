@@ -53,7 +53,12 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
         {
-            GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(25);
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
         }
 
         foreach (CardBehaviour card in GetComponentsInChildren<CardBehaviour>())
@@ -77,8 +82,12 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0 && state == State.Selecting)
         {
-            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(5);
-            GameObject.FindGameObjectWithTag("DeckPile").GetComponent<DeckPile>().DrawCard();
+            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(25);
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
+            DrawNewCard();
         }
 
         // call whenever the number of cards in hand changes
@@ -199,5 +208,12 @@ public class CardSelectionManager : InputtableBehaviour
         {
             state = State.Selecting;
         }
+    }
+
+    public void discardAtRandom()
+    {
+        cards_in_hand = GetHand();
+        cards_in_hand[UnityEngine.Random.Range(0, cards_in_hand.Count - 1)].Discard();
+
     }
 }

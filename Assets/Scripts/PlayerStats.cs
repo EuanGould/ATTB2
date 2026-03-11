@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class PlayerStats : MonoBehaviour
     {
         health -= amount;
         health_text.text = health.ToString();
+
+        if (health <= 0)
+        {
+            Die();
+        } 
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void ResetPlayerStats()
@@ -30,6 +41,12 @@ public class PlayerStats : MonoBehaviour
 
     private void FixedUpdate()
     {
+        health_text.text = health.ToString();
+    }
+
+    public void Heal(int amount)
+    {
+        health += amount;
         health_text.text = health.ToString();
     }
 }

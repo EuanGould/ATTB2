@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class CardAddingUIBehaviour : InputtableBehaviour
     [SerializeField] private RectTransform choice_c_transform;
 
     [SerializeField] private Image background;
+    [SerializeField] private TextMeshProUGUI text;
 
     GameObject choice_a;
     GameObject choice_b;
@@ -38,6 +40,7 @@ public class CardAddingUIBehaviour : InputtableBehaviour
         active = true;
         
         background.enabled = true;
+        text.enabled = true;
         
         int choice_a_id = Random.Range(0, card_pool.Length);
 
@@ -141,6 +144,7 @@ public class CardAddingUIBehaviour : InputtableBehaviour
         }
 
         background.enabled = false;
+        text.enabled = false;
 
         GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<InputtableBehaviour>();
 

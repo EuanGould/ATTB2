@@ -10,11 +10,12 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private TextMeshProUGUI health_text;
     [SerializeField] private Image selection_arrow;
     [SerializeField] private TextMeshProUGUI countdown_text;
+    [SerializeField] private TextMeshProUGUI damage_text;
 
     // adjustables
-    [SerializeField] private int max_health;
-    [SerializeField] private int attack_cooldown;
-    [SerializeField] private int attack_damage;
+    [SerializeField] public int max_health;
+    [SerializeField] public int attack_cooldown;
+    [SerializeField] public int attack_damage;
 
     private TimeManager time_manager;
     private int health;
@@ -28,11 +29,13 @@ public class EnemyBehaviour : MonoBehaviour
         time_manager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
         cooldown_start_time = time_manager.getTotalTime();
         countdown_text.text = attack_cooldown.ToString();
+        UpdateAttackDamage();
     }
 
     public void OnSpawning()
     {
         cooldown_start_time = time_manager.getTotalTime();
+        UpdateAttackDamage();
     }
 
     public void updateHealth()
@@ -113,5 +116,22 @@ public class EnemyBehaviour : MonoBehaviour
         Deselect();
         Destroy(this.gameObject);
 
+    }
+
+    private void UpdateAttackDamage()
+    {
+        damage_text.text = attack_damage.ToString();
+    }
+
+    public void SetAttackDamage(int amount)
+    {
+        attack_damage = amount;
+        UpdateAttackDamage();
+    }
+
+    public void Heal(int amount)
+    {
+        health = Mathf.Min(max_health, health + amount);
+        updateHealth();
     }
 }
