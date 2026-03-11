@@ -1,16 +1,31 @@
+using TMPro;
 using UnityEngine;
 
 public class DamageNumberBehaviour : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    float starting_time = Mathf.Infinity;
+    
+    private void Awake()
     {
-        
+        starting_time = Time.time;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetValue(int value)
     {
-        
+        gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString();
+        if (value > 0)
+        {
+            gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        gameObject.GetComponent<RectTransform>().anchoredPosition += Vector2.down * Time.fixedDeltaTime * 17;
+
+        if (Time.time > starting_time + 1)
+        {
+            Destroy(gameObject);
+        }
     }
 }

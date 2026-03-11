@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DamageVFX : MonoBehaviour
 {
-    [SerializeField] private Vector2 goal = new Vector2();
+    [SerializeField] private Vector3 goal = new Vector3();
 
     private void FixedUpdate()
     {
-        GetComponent<RectTransform>().anchoredPosition += (goal - GetComponent<RectTransform>().anchoredPosition) * Time.fixedDeltaTime * 7;
+        GetComponent<RectTransform>().position += (goal - GetComponent<RectTransform>().position) * Time.fixedDeltaTime * 7;
 
-        if ((goal - GetComponent<RectTransform>().anchoredPosition).magnitude < 1)
+        if ((goal - GetComponent<RectTransform>().position).magnitude < 1)
         {
             Destroy(gameObject);
         }

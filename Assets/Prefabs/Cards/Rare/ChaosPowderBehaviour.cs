@@ -17,7 +17,7 @@ public class ChaosPowderBehaviour : CardBehaviour
             GameObject choice = Instantiate(card_pool[choice_id]);
             choice.transform.SetParent(GameObject.FindGameObjectWithTag("PlayerHand").transform);
             choice.GetComponent<CardBehaviour>().SetIsTemporaryCard(true);
-            choice.GetComponent<CardBehaviour>().SetCost(0);
+            choice.GetComponent<CardBehaviour>().SetCost(1);
             choice.GetComponent<RectTransform>().localScale = Vector3.one;
             
         }

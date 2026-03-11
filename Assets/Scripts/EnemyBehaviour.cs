@@ -51,6 +51,7 @@ public class EnemyBehaviour : MonoBehaviour
         health -= amount;
         updateHealth();
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageEnemy(GetComponent<RectTransform>());
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(GetComponent<RectTransform>(), -amount);
     }
 
     public void DeathCheck()
@@ -118,7 +119,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    private void UpdateAttackDamage()
+    protected void UpdateAttackDamage()
     {
         damage_text.text = attack_damage.ToString();
     }

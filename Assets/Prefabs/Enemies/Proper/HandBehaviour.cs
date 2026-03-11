@@ -7,7 +7,7 @@ public class HandBehaviour : EnemyBehaviour
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamagePlayer(GetComponent<RectTransform>());
         GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().TakeDamage(attack_damage);
         Heal(attack_damage);
-        SetAttackDamage(attack_damage + 2);
+        SetAttackDamage(attack_damage + 1);
 
     }
 }

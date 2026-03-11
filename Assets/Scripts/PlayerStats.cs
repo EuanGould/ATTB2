@@ -23,10 +23,13 @@ public class PlayerStats : MonoBehaviour
         health -= amount;
         health_text.text = health.ToString();
 
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(health_text.gameObject.GetComponent<RectTransform>(), -amount);
+
         if (health <= 0)
         {
             Die();
-        } 
+        }
+
     }
 
     public void Die()
@@ -60,5 +63,6 @@ public class PlayerStats : MonoBehaviour
     {
         health += amount;
         health_text.text = health.ToString();
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(health_text.gameObject.GetComponent<RectTransform>(), amount);
     }
 }
