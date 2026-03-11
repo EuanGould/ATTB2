@@ -23,6 +23,8 @@ public class CardBehaviour : MonoBehaviour
 
     private bool is_temporary_card = false;
 
+    protected PlayerStats player_stats;
+
     public EnemyBehaviour[] GetEnemies()
     {
         return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
@@ -95,7 +97,7 @@ public class CardBehaviour : MonoBehaviour
         initialSize = transform.localScale;
         time_cost = starting_time_cost;
         cost_text.text = time_cost.ToString();
-
+        player_stats = GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>();
     }
 
     private void FixedUpdate()

@@ -545,8 +545,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Deals damage to an enemy equal to the number of cards in your discard pile.
-    Shuffles your discard pile into your deck.
+  m_text: <b>Deals damage to an enemy</b> equal to the number of cards in the <b>discard
+    pile</b>. Shuffles the <b>discard pile</b> into your <b>deck pile</b>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

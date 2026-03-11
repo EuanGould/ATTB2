@@ -545,7 +545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Deal 5 damage
+  m_text: '<b>Deal 5 damage</b>
 
     to an enemy.'
   m_isRightToLeft: 0

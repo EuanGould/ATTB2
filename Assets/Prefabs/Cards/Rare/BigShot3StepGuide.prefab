@@ -547,10 +547,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Reduce the cost of every card in your deck pile by 2 this fight.
+  m_text: '<b>Reduce the cost</b> of every card in the
 
-    Draw
-    a card.'
+    <b>deck pile</b> by 2
+
+    this
+    fight.
+
+    <b>Draw a card</b>.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

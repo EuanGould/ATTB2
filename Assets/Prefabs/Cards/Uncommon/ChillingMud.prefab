@@ -545,7 +545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Deals 5 damage to an enemy and delay their attack by 4.
+  m_text: '<b>Deal 5 damage</b> to an enemy and <b>delay their attack by 4</b>.
 
 '
   m_isRightToLeft: 0
