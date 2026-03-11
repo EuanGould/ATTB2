@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int starting_health = 100;
 
     private int health;
+    private int exhaustion = 15;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +38,17 @@ public class PlayerStats : MonoBehaviour
     {
         health = starting_health;
         health_text.text = health.ToString();
+        exhaustion = 15;
+    }
+
+    public void IncrementExhaustion()
+    {
+        exhaustion += exhaustion;
+    }
+
+    public int GetExhaustion()
+    {
+        return exhaustion;
     }
 
     private void FixedUpdate()

@@ -53,7 +53,8 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
         {
-            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(25);
+            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
+            GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
@@ -82,7 +83,8 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0 && state == State.Selecting)
         {
-            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(25);
+            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
+            GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
@@ -116,6 +118,8 @@ public class CardSelectionManager : InputtableBehaviour
         if (state == State.Selecting)
         {
             // called when inputManager detects a held input
+            cards_in_hand = GetHand();
+
             state = State.Watching;
             cards_in_hand[currentSelected].RunCost();
             cards_in_hand[currentSelected].InvokePlay();
@@ -127,6 +131,8 @@ public class CardSelectionManager : InputtableBehaviour
         if (state == State.Selecting)
         {
             // called when inputManager detects a tap input
+            cards_in_hand = GetHand();
+
             cards_in_hand[currentSelected].Deselect();
             currentSelected += 1;
             currentSelected %= cards_in_hand.Count;

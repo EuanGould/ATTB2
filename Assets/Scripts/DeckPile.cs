@@ -39,14 +39,14 @@ public class DeckPile : MonoBehaviour
         }
     }
 
-    public void DrawCard()
+    public CardBehaviour DrawCard()
     {
         
         if (GetComponentsInChildren<CardBehaviour>().Length == 0)
         {
             if (GameObject.FindGameObjectWithTag("DiscardPile").GetComponentsInChildren<CardBehaviour>().Length == 0)
             {
-                return;
+                return null;
             }
             else
             {
@@ -57,8 +57,11 @@ public class DeckPile : MonoBehaviour
         }
 
         CardBehaviour[] cards = GetComponentsInChildren<CardBehaviour>();
-        cards[Random.Range(0, cards.Length - 1)].GetComponent<RectTransform>().SetParent(GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<RectTransform>());
+        CardBehaviour output = cards[Random.Range(0, cards.Length - 1)];
+        output.GetComponent<RectTransform>().SetParent(GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<RectTransform>());
 
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().ResetHandSelection();
+
+        return output;
     }
 }
