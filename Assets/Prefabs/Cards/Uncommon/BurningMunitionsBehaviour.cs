@@ -11,6 +11,7 @@ public class BurningMunitionsBehaviour : CardBehaviour
             card.transform.SetParent(GameObject.FindGameObjectWithTag("DiscardPile").transform);
             payoff_damage++;
         }
+        GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().UpdateDeckAndDiscardPileText();
         Target();
     }
 

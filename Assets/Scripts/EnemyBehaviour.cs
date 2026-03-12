@@ -133,6 +133,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void Heal(int amount)
     {
         health = Mathf.Min(max_health, health + amount);
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(GetComponent<RectTransform>(), amount);
         updateHealth();
     }
 }
