@@ -122,6 +122,10 @@ public class CardBehaviour : MonoBehaviour
         Discard();
         GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>().FinishResolution();
         GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().DeathCheckAll();
+        if (GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentInChildren<GoldenManBehaviour>() != null)
+        {
+            GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentInChildren<GoldenManBehaviour>().onPlayed();
+        }
     }
 
     public void ResetValues()

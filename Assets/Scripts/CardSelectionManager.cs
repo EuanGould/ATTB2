@@ -13,6 +13,8 @@ public class CardSelectionManager : InputtableBehaviour
 
     private List<CardBehaviour> cards_in_hand;
 
+    private bool unexhaustable = false;
+
     private enum State
     {
         Selecting,
@@ -62,8 +64,12 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0)
         {
-            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
-            GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
+            if (!unexhaustable)
+            {
+                GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
+                GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
+            }
+
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
@@ -93,8 +99,12 @@ public class CardSelectionManager : InputtableBehaviour
     {
         if (new List<CardBehaviour>(GetComponentsInChildren<CardBehaviour>()).Count == 0 && state == State.Selecting)
         {
-            GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
-            GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
+            if (!unexhaustable)
+            {
+                GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>().addTotalTime(GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().GetExhaustion());
+                GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().IncrementExhaustion();
+            }
+
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
@@ -185,6 +195,7 @@ public class CardSelectionManager : InputtableBehaviour
             card.transform.SetParent(GameObject.FindGameObjectWithTag("DeckPile").transform);
         }
 
+        unexhaustable = true;
     }
 
     public void UpdateDeckAndDiscardPileText()
@@ -208,6 +219,7 @@ public class CardSelectionManager : InputtableBehaviour
         }
 
         UpdateDeckAndDiscardPileText();
+        unexhaustable = false;
     }
 
     public bool getWatching()
