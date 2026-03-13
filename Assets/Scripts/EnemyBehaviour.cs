@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField] private RectTransform health_bar_fill;
-    [SerializeField] private TextMeshProUGUI health_text;
-    [SerializeField] private Image selection_arrow;
-    [SerializeField] private TextMeshProUGUI countdown_text;
-    [SerializeField] private TextMeshProUGUI damage_text;
+    [SerializeField] protected RectTransform health_bar_fill;
+    [SerializeField] protected TextMeshProUGUI health_text;
+    [SerializeField] protected Image selection_arrow;
+    [SerializeField] protected TextMeshProUGUI countdown_text;
+    [SerializeField] protected TextMeshProUGUI damage_text;
 
     // adjustables
     [SerializeField] public int max_health;
     [SerializeField] public int attack_cooldown;
     [SerializeField] public int attack_damage;
 
-    private TimeManager time_manager;
-    private int health;
+    protected TimeManager time_manager;
+    protected int health;
 
-    private int cooldown_start_time;
+    protected int cooldown_start_time;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
         UpdateAttackDamage();
     }
 
-    public void OnSpawning()
+    public virtual void OnSpawning()
     {
         cooldown_start_time = time_manager.getTotalTime();
         UpdateAttackDamage();
@@ -79,7 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
         return delay_to_add;
     }
 
-    private void InvokeAttack(float delay)
+    protected void InvokeAttack(float delay)
     {
         Invoke("Attack", delay);
     }

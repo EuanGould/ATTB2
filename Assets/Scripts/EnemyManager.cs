@@ -109,11 +109,11 @@ public class EnemyManager : InputtableBehaviour
     private void PositionEnemies()
     {
         float screen_size = 2080;
-        float gap = screen_size * 0.7f / enemies_in_fight.Count;
+        float gap = screen_size * 0.8f / enemies_in_fight.Count;
 
         for (int i = 0; i < enemies_in_fight.Count; i++)
         {
-            enemies_in_fight[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(-screen_size * 0.35f + gap * (i + 0.5f), -320);
+            enemies_in_fight[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(-screen_size * 0.4f + gap * (i + 0.5f), -320);
         }
     }
 

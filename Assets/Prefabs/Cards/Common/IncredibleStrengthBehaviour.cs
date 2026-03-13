@@ -6,7 +6,7 @@ public class IncredibleStrengthBehaviour : CardBehaviour
     {
         foreach (EnemyBehaviour enemy in GetEnemies())
         {
-            enemy.damage(2);
+            enemy.damage(4);
         }
 
         FinishPlaying();

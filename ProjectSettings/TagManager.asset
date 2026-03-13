@@ -18,6 +18,7 @@ TagManager:
   - ActiveZone
   - PlayerRectPos
   - CardAddingUI
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
