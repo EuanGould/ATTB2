@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5888513361735726657}
-  - component: {fileID: 1485637690765385705}
+  - component: {fileID: 8032858255016516692}
   m_Layer: 5
-  m_Name: SturdyTroul
+  m_Name: MagnitudeFive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 100}
   m_SizeDelta: {x: 187.5, y: 262.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1485637690765385705
+--- !u!114 &8032858255016516692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,12 +50,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1853232189254572617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcea8801a6ae8ce4584598b357b56d36, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fd598c785704cd4aaff73482b578e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enlarge_factor: 1.2
   vertical_offset_on_selection: 200
-  starting_time_cost: 1
+  starting_time_cost: 15
   cost_text: {fileID: 7875050567431561654}
   clockface: {fileID: 522766332808022045}
 --- !u!1 &2231846288883346832
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sturdy Trowel
+  m_text: Magnitude 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -545,7 +545,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return the last played card to your <b>hand</b> from the <b>discard pile</b>.
+  m_text: '<b>Discard</b> all other cards in <b>hand</b>, <b>Deal 5 damage</b> to
+    an enemy for each card discarded.
+
+    <b>Draw 5 cards</b>.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

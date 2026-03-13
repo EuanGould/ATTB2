@@ -11,6 +11,7 @@ public class ChillingMudBehaviour : CardBehaviour
     {
         enemy.DelayAttack(4);
         enemy.damage(5);
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

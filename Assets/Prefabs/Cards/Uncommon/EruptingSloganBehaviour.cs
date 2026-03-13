@@ -10,6 +10,7 @@ public class EruptingSloganBehaviour : CardBehaviour
             enemy.damage(2);
         }
 
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

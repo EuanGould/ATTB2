@@ -11,6 +11,7 @@ public class StrategicStrikeBehaviour : CardBehaviour
     {
         enemy.damage(3);
         DrawNewCard();
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

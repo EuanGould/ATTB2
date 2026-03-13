@@ -9,6 +9,8 @@ public class IncredibleStrengthBehaviour : CardBehaviour
             enemy.damage(4);
         }
 
+        player_stats.ExpendAttackMult();
+
         FinishPlaying();
     }
 }

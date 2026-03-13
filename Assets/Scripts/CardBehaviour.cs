@@ -25,6 +25,8 @@ public class CardBehaviour : MonoBehaviour
 
     protected PlayerStats player_stats;
 
+    protected CardSelectionManager card_selection_manager;
+
     public EnemyBehaviour[] GetEnemies()
     {
         return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
@@ -98,6 +100,7 @@ public class CardBehaviour : MonoBehaviour
         time_cost = starting_time_cost;
         cost_text.text = time_cost.ToString();
         player_stats = GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>();
+        card_selection_manager = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
     }
 
     private void FixedUpdate()

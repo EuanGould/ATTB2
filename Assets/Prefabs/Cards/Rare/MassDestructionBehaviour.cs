@@ -9,6 +9,7 @@ public class MassDestructionBehaviour : CardBehaviour
             enemy.damage(30);
         }
 
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

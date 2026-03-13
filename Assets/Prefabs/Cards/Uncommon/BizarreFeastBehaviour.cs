@@ -10,6 +10,7 @@ public class BizarreFeastBehaviour : CardBehaviour
             player_stats.Heal(2);
         }
 
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

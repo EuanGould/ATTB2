@@ -10,6 +10,7 @@ public class ArcaneBlastBehaviour : CardBehaviour
     public override void targetPayoff(EnemyBehaviour enemy)
     {
         enemy.damage(5);
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

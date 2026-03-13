@@ -15,6 +15,7 @@ public class EvolvingStrainBehaviour : CardBehaviour
 
         GameObject.FindGameObjectWithTag("DiscardPile").GetComponent<DiscardPile>().ShuffleIntoDeck();
 
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

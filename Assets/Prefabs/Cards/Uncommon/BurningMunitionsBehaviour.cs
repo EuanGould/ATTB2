@@ -19,6 +19,7 @@ public class BurningMunitionsBehaviour : CardBehaviour
     {
         enemy.damage(payoff_damage);
         enemy.DelayAttack(payoff_damage);
+        player_stats.ExpendAttackMult();
         FinishPlaying();
     }
 }

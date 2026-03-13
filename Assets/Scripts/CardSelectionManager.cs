@@ -46,7 +46,16 @@ public class CardSelectionManager : InputtableBehaviour
 
     public void DeselectAll()
     {
-        cards_in_hand[currentSelected].Deselect();
+        cards_in_hand = GetHand();
+
+        foreach (CardBehaviour card in cards_in_hand)
+        {
+            card.Deselect();
+        }
+
+        currentSelected = 0;
+
+        ResetHandSelection();
     }
 
     private void SanitiseCurrentSelection()
@@ -60,6 +69,7 @@ public class CardSelectionManager : InputtableBehaviour
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
+            DeselectAll();
         }
 
         foreach (CardBehaviour card in GetComponentsInChildren<CardBehaviour>())
@@ -90,6 +100,7 @@ public class CardSelectionManager : InputtableBehaviour
             DrawNewCard();
             DrawNewCard();
             DrawNewCard();
+            DeselectAll();
         }
 
         // call whenever the number of cards in hand changes

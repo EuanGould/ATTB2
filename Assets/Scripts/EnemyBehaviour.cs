@@ -35,6 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void OnSpawning()
     {
         cooldown_start_time = time_manager.getTotalTime();
+        gameObject.GetComponent<RectTransform>().localScale = Vector3.one * 0.7f;
         UpdateAttackDamage();
     }
 
@@ -48,10 +49,12 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void damage(int amount)
     {
         // called when taking damage
-        health -= amount;
+        int post_calc_amount = GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>().CalcDamage(amount);
+
+        health -= post_calc_amount;
         updateHealth();
         GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageEnemy(GetComponent<RectTransform>());
-        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(GetComponent<RectTransform>(), -amount);
+        GameObject.FindGameObjectWithTag("VFXCanvas").GetComponent<VFXManager>().CreateDamageNumber(GetComponent<RectTransform>(), -post_calc_amount);
     }
 
     public void DeathCheck()
