@@ -27,6 +27,8 @@ public class CardBehaviour : MonoBehaviour
 
     protected CardSelectionManager card_selection_manager;
 
+    protected EnemyManager enemy_manager;
+
     public EnemyBehaviour[] GetEnemies()
     {
         return GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponentsInChildren<EnemyBehaviour>();
@@ -89,9 +91,13 @@ public class CardBehaviour : MonoBehaviour
 
     public void Target()
     {
-        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().current_card = this;
-        GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
-        GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>().ResetEnemySelection();
+        
+        enemy_manager.current_card = this;
+        if (!enemy_manager.AutoSelectCheck())
+        {
+            GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>().inputtable = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
+            enemy_manager.ResetEnemySelection();
+        }
     }
 
     private void Awake()
@@ -101,6 +107,7 @@ public class CardBehaviour : MonoBehaviour
         cost_text.text = time_cost.ToString();
         player_stats = GameObject.FindGameObjectWithTag("PlayerStats").GetComponent<PlayerStats>();
         card_selection_manager = GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<CardSelectionManager>();
+        enemy_manager = GameObject.FindGameObjectWithTag("EnemiesLayer").GetComponent<EnemyManager>();
     }
 
     private void FixedUpdate()

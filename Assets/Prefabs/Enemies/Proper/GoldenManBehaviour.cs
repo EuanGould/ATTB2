@@ -18,7 +18,7 @@ public class GoldenManBehaviour : EnemyBehaviour
         countdown_text.text = attack_cooldown.ToString();
         UpdateAttackDamage();
 
-        start_pos = GetComponent<RectTransform>().anchoredPosition;
+        start_pos = new Vector2(0, -320);
     }
 
     private void FixedUpdate()

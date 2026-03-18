@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyManager : InputtableBehaviour
 {
@@ -151,6 +152,21 @@ public class EnemyManager : InputtableBehaviour
         else
         {
             GameObject.FindGameObjectWithTag("CardAddingUI").GetComponent<CardAddingUIBehaviour>().InvokeOfferChoice();
+        }
+    }
+
+    public bool AutoSelectCheck()
+    {
+        ResetEnemySelection();
+        if (enemies_in_fight.Count == 1)
+        {
+            currentSelected = 0;
+            InvokableTargetPayoff();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

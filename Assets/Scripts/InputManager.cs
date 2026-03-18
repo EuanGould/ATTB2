@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour
     // adjustables
     [SerializeField] private float held_threshold = 0.6f;
 
+    [SerializeField] private HeldIndicator indicator;
+
     // internal variables
 
     private bool button_held = false;
@@ -47,6 +49,12 @@ public class InputManager : MonoBehaviour
         if (button_held)
         {
             button_held_duration += Time.deltaTime;
+            indicator.changeIndication(button_held_duration / held_threshold);
+
+        }
+        else
+        {
+            indicator.changeIndication(0);
         }
     }
 }

@@ -545,11 +545,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'If this is the only card in <b>hand</b>, <b>deal 20 damage</b> to an enemy
-    and <b>draw 4 cards</b>.
+  m_text: 'If this is the only card in <b>hand</b> then
 
-
-    <b>Draw a card</b>.'
+    <b>DESTROY ALL ENEMIES</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
