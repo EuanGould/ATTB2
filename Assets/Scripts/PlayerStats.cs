@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Die()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("DeathScreen");
     }
 
     public void ResetPlayerStats()
